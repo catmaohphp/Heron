@@ -6,33 +6,18 @@ Automatically generation of performant programs for deep learning accelerators (
 
 ## Installation
 
-**Build for Tensor Core code generation.** Make sure that your platform has GPUs with Tensor Core available. Tested platform includes V100, T4, and RTX8000, experiments on these platforms should not inccur any problem.
+**Requirements for TensorCore code generation.** Make sure that your platform has GPUs with TensorCore available. Tested platform includes V100, T4, and A100.
 
 First, check the dependancies needed.
 
 ```
-cublas v10.2
-cudnn v7.6.5
+CUDA11.2
 ```
 
 Second, build TVM for gpu. You can follow [TVM build from source instructions](http://tmp.syfeng.net:9090/install/from_source.html#install-from-source) for details.
 
-```shell
-cd third_parties/tvm
-mkdir build
-cp cmake/config_tc.cmake build
-cd build
-cmake ..
-make -j8
 
-# You can add following configurations to you ~/.bashrc file
-export TVM_HOME=/path/to/tvm
-export PYTHONPATH=$TVM_HOME/python:${PYTHONPATH}
-```
-
-
-
-**Build for  DL Boost  code generation.** Make sure that your platform has CPUs with DL Boost available. We conducted our experiments on Intel’s Xeon Gold 6240 CPU.
+**Requirements for DL Boost code generation.** Make sure that your platform has CPUs with DL Boost available. We conducted our experiments on Intel’s Xeon Gold 6240 CPU.
 
 First, check the dependancies needed.
 
@@ -43,47 +28,41 @@ llvm 8.0.0
 
 Second, build TVM for cpu. You can follow [TVM build from source instructions](http://tmp.syfeng.net:9090/install/from_source.html#install-from-source) for details.
 
-```
-cd third_parties/tvm
-mkdir build
-cp cmake/config_cpu.cmake build
-cd build
-cmake ..
-make -j8
-
-# You can add following configurations to you ~/.bashrc file
-export TVM_HOME=/path/to/tvm
-export PYTHONPATH=$TVM_HOME/python:${PYTHONPATH}
-```
-
-
 
 ## Tuning
 
-**A quick start for Tensor Core tuning.** Take gemm operation with (m,k,n) =(32, 4096, 4096) as an example, we show how to automatically schedule with Heron.
+**A quick start for TensorCore tuning.** 
+
+Take gemm operation with (m,k,n) =(64, 64, 64) as an example, we show how to automatically schedule with Heron.
 
 ```shell
-cd tests
-python tests.py -p tensorcore -n gemm -c ./configs/quick_start.json
+cd tests/quick_start/tensorcore
+python run.py -p tensorcore -c quick_start.json
 ```
 
-Then, you can get the following results in 1 or 2 minutes.
-
-...
-
-All configurations locates in ./configs folder. You can try your own configuration if needed. Take quick_start.json for example,  the comments show the functionality of each configuration.
-
-...
-
-To obtain results in our paper, you can type the following instruction. These will take you ... minutes to finish.
-
+Then, you can get the following results in 2 minutes.
 ```shell
-python tests.py -p tensorcore -n gemm -c ./configs/config_G4.json
+PASS
+Case [64, 64, 64], latency 0.002236 ms.
 ```
 
-If your platform is same with our's, you can try the tuned solutions by
+**A quick start for DL Boost tuning.**
 
+ Take gemm operation with (m,k,n) =(64, 64, 64) as an example, we show how to automatically schedule with Heron.
 ```shell
-python tests.py -p tensorcore -n gemm -c ./configs/config_G4.json -t ./tuned/tuned_G4.pkl
+cd tests/quick_start/dlboost
+python run.py -p dlboost -c quick_start.json
 ```
 
+Then, you can get the following results in 2 minutes.
+```shell
+PASS
+Case [64, 64, 64], latency 0.002658 ms.
+```
+**Complete evaluation**
+
+For complete evaluation, please run the corresponding scripts. For example, to evaluate TensorCore operator performances shown in Figure 6, please use the following commands:
+```shell
+cd tests/Figure6
+python run.y -c path/to/test_cases.json
+``` 
