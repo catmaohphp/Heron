@@ -391,6 +391,6 @@ def sched_via_rule(ctx, s):
         if do_vectorize(s, stage_name, ctx):
             ctx.addSched('vectorize', stage_name, s)
         ctx.addSched("finish", stage_name, s)
-  # ctx.addThreadLimit(s)
-  # ctx.addShareMemLimit(s)
+    ctx.addThreadLimit(s)
+    ctx.addShareMemLimit(s)
 

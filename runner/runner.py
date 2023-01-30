@@ -9,15 +9,15 @@ class Runner:
     def results2tup(self, results):
         res = []
         for x in results:
-            print("-----------------------------------------------------------------------------")
+          # print("-----------------------------------------------------------------------------")
             if x.error_no == 0:
                 perf_time = np.array(x.costs).mean()
                 res.append((x.error_no, math.log(1 / perf_time) ))
-                print(x)
+          #     print(x)
             else:
                 res.append((x.error_no, 0.0))
-                for cost in x.costs:
-                    print(cost)
+          #     for cost in x.costs:
+          #         print(cost)
         return res
     
     def run(self, samples, perf_buffer):

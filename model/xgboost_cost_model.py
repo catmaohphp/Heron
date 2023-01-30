@@ -209,7 +209,7 @@ def custom_callback(
         elif env.iteration - best_iteration >= stopping_rounds:
             best_msg = state["best_msg"]
             raise EarlyStopException(best_iteration)
-        print(state)
+      # print(state)
 
     return callback
 
