@@ -5,6 +5,14 @@
 Automatically generation of performant programs for deep learning accelerators (DLA) extremely difficult. Heron solve this problem by automatically generating a constrained search space and explore it with a novel constrained genetic algorithm(CGA). 
 
 ## Installation
+**Common requirements**
+```
+Python 3.6.10
+```
+Please run the following command to install the dependencies.
+```shell
+pip install -r requirements.txt
+```
 
 **Requirements for TensorCore code generation.** Make sure that your platform has GPUs with TensorCore available. Tested platform includes V100, T4, and A100.
 
@@ -14,10 +22,11 @@ First, check the dependancies needed.
 CUDA11.2
 ```
 
-Second, build TVM for gpu. You can follow [TVM build from source instructions](http://tmp.syfeng.net:9090/install/from_source.html#install-from-source) for details.
+Second, build TVM for gpu. You can follow [TVM build from source instructions](https://tvm.apache.org/docs/install/from_source.html) for details.
 
 
-**Requirements for DL Boost code generation.** Make sure that your platform has CPUs with DL Boost available. We conducted our experiments on Intel’s Xeon Gold 6240 CPU.
+**Requirements for DL Boost code generation.**
+ Make sure that your platform has CPUs with DL Boost available. We conducted our experiments on Intel’s Xeon Gold 6240 CPU.
 
 First, check the dependancies needed.
 
@@ -26,13 +35,12 @@ First, check the dependancies needed.
 llvm 8.0.0
 ```
 
-Second, build TVM for cpu. You can follow [TVM build from source instructions](http://tmp.syfeng.net:9090/install/from_source.html#install-from-source) for details.
+Second, build TVM for cpu. You can follow [TVM build from source instructions](https://tvm.apache.org/docs/install/from_source.html) for details.
 
 
 ## Tuning
 
 **A quick start for TensorCore tuning.** 
-
 Take gemm operation with (m,k,n) =(64, 64, 64) as an example, we show how to automatically schedule with Heron.
 
 ```shell
@@ -47,7 +55,6 @@ Case [64, 64, 64], latency 0.002236 ms.
 ```
 
 **A quick start for DL Boost tuning.**
-
  Take gemm operation with (m,k,n) =(64, 64, 64) as an example, we show how to automatically schedule with Heron.
 ```shell
 cd tests/quick_start/dlboost
@@ -60,7 +67,6 @@ PASS
 Case [64, 64, 64], latency 0.002658 ms.
 ```
 **Complete evaluation**
-
 For complete evaluation, please run the corresponding scripts. For example, to evaluate TensorCore operator performances shown in Figure 6, please use the following commands:
 ```shell
 cd tests/Figure6

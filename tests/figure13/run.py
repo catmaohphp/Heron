@@ -100,7 +100,7 @@ def runArgs(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run cases in Heron.')
     parser.add_argument("-p", "--platform", choices=['tensorcore', 'dlboost'], type=str, default="tensorcore", help="Hardware platform: currently tensorcore and dlboost.")
-    parser.add_argument("-r", "--repeat", type=int, default=1, help="Repeat num of experiments")
+    parser.add_argument("-r", "--repeat", type=int, default=5, help="Repeat num of experiments")
     parser.add_argument("-d", "--device_id", type=int, default=0, help="Device index for measurement")
     parser.add_argument("-sid", "--start_id", type=int, default=0, help="Start case number in test cases")
     parser.add_argument("-eid", "--end_id", type=int, default=1e4, help="End case number in test cases")
